@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            header {
+                -webkit-app-region: drag;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 32px;
+            }
+            header::before{
+                content: "VX";
+                font-family: Consolas;
+            }
+
+            * {
+                user-select: none;
+            }
+
+            body {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr;
+                gap: 0px 0px;
+                grid-template-areas: ". .";
+                overflow: hidden;
+                background: black;
+                height: 100vh;
+                margin: 0;
+                background: url(https://media0.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif) center center no-repeat;
+                background-size: cover;
+                background-color: black;
+            }
+
+            body::before {
+                content: "";
+                width: 100vw;
+                height: 100vh;
+                background: black;
+                position: absolute;
+                opacity: 0.35;
+                z-index: -1;
+            }
+
+            .main {
+                display: flex;
+                text-align: center;
+                z-index: 10;
+                font-family: Consolas;
+                color: #dedede;
+                width: 100vw;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .main>h1 {
+                text-align: center;
+                color: white;
+                margin: 0;
+                font-size: 50vh;
+                color: #ffffffc4;
+                filter: drop-shadow(2px 4px 6px black);
+            }
+
+            .arrow {
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+                font-family: Consolas;
+            }
+
+            .right {
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+
+            .next {
+                top: 50%;
+                color: white;
+                position: fixed;
+                right: 10px;
+                padding: 0 21px;
+                height: 50px;
+                z-index: 10;
+                border: solid #ffffff66 1px;
+                border-radius: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 9px;
+                transition: width 50ms linear;
+                transform: translateY(-50%);
+            }
+
+            .next>div.overflow {
+                display: block;
+                max-width: 80px;
+                overflow: hidden;
+                width: 0%;
+                transition: width 50ms linear;
+            }
+
+            .next .text {
+                font-family: Consolas;
+                font-weight: 600;
+                color: white;
+                transition: width 1s;
+                padding-right: 10px;
+                margin-left: 100%;
+                transition: margin-left 50ms linear;
+            }
+
+            .next:hover div.overflow {
+                width: fit-content;
+            }
+
+            .next:hover .text {
+                margin-left: 0%;
+            }
+
+            .next:hover {
+                width: fit-content;
+            }
+
+            #parent {
+                width: 100vw;
+                height: 100vh;
+                display: grid;
+                width: 100vw;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr;
+                gap: 0px 0px;
+                grid-template-areas: ". . . .";
+                overflow: hidden;
+            }
+
+            page {
+                width: 100vw;
+            }
+
+            #parent>page.current,
+            #parent>page.transition-to {
+                transform: translateX(-100%);
+            }
+
+            page.current {
+                transform: unset;
+                transition: transform ease 1s;
+            }
+
+            page.transition-to {
+                transform: unset;
+                transition: transform ease 1s;
+            }
+
+            .next.hidden {
+                color: red !important;
+                display: none !important;
+            }
+
+            textarea.eula {
+                font-family: Consolas;
+                height: 318px;
+                width: 545px;
+                background: #000000a6;
+                border-radius: 10px;
+                padding: 20px 10px;
+                overflow-x: hidden;
+                font-weight: bold;
+                color: white;
+                overflow-x: hidden;
+                resize: none;
+                outline: none;
+                user-select: text;
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #222;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <header></header>
+        <script></script>
+        <div id="parent" style="width:100vw;">
+            <div class="main">
+                <h1>VX</h1>
+                <h2>fastest, xyz, 123 discord client mod</h2>
+            </div>
+            <div class="main elua">
+                <h2>please agree to the EULA:</h2>
+                <center>
+                    <textarea class="eula" readonly>End-User License Agreement for BetterDiscord
+
+PLEASE READ THIS AGREEMENT CAREFULLY. IT CONTAINS IMPORTANT TERMS THAT AFFECT YOU AND YOUR USE OF THE SOFTWARE. BY INSTALLING, COPYING OR USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL, COPY, OR USE THE SOFTWARE.
+
+This End-User License Agreement (EULA) is a legal agreement between you--either an individual or a single entity--and the author(s) of this Software for the product identified above, which includes computer software and may include associated media, and online or electronic documentation ("Software").
+
+By installing, copying, or otherwise using the Software, you agree to be bounded by the terms of this EULA.
+If you do not agree to the terms of this EULA, do not install or use the Software.
+
+
+1. GRANT OF LICENSE.
+This EULA grants you a non-exclusive, non-sublicensable, non-transferable license to install and use the Software. You may install and use an unlimited number of copies of the Software.
+
+You may reproduce and distribute an unlimited number of copies of the Software; provided that each copy shall be a true and complete copy, including all copyright and trademark notices.
+
+Without prejudice to any other rights, the author(s) of this Software may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such event, you must destroy all copies of the Software and all of its component parts.
+
+
+2. COPYRIGHT.
+All title and copyrights in and to the Software (including but not limited to any images, libraries, and examples incorporated into the Software), the accompanying documentation, and any copies of the Software are owned by the author(s) of this Software.
+
+
+3. NO WARRANTIES.
+The author(s) of this Software expressly disclaims any warranty for the Software. The Software and any related documentation is provided "as is" without warranty of any kind, either express or implied, including, without limitation, the implied warranties or merchantability, fitness for a particular purpose, or noninfringement. The entire risk arising out of use or performance of the Software remains with you.
+
+
+4. NO LIABILITY FOR DAMAGES.
+In no event shall the author(s) of this Software be liable for any special, consequential, incidental or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use this product, even if the author(s) of this Software is aware of the possibility of such damages and known defects.</textarea>
+                </center>
+            </div>
+            <div class="main">
+                <h2>fastest, xyz, 123 discord client mod</h2>
+            </div>
+        </div>
+        <div class="next">
+            <div class="overflow">
+                <i class="text">START</i>
+            </div>
+            <i class="arrow right"></i>
+        </div>
+        <script src="./jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                var slideCount = $("#parent > div").length;
+                var slideWidth = $("#parent > div").width();
+                var slideHeight = $("#parent > div").height();
+                var sliderUlWidth = slideCount * slideWidth;
+                let index = 0;
+                const names = ["START", "AGREE", "INSTALL"]
+
+                function moveRight(event) {
+                    $("#parent").animate({
+                        "margin-left": "-100%"
+                    }, 200, function() {
+                        $("#parent > div:first-child").remove();
+                        $("#parent").css({
+                            "margin-left": 0
+                        });
+                        $(".text").text(names[++index]);
+                        if (index >= 3) {
+                            $(".next").remove();
+                            install();
+                        }
+                    });
+                }
+                $(".next").click(moveRight);
+            });
+
+            function install() {
+                ipcRenderer.send('install')
+            }
+        </script>
+    </body>
+</html>
