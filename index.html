@@ -1,211 +1,41 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <style>
-            header {
-                -webkit-app-region: drag;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 32px;
-            }
-            header::before{
-                content: "VX";
-                font-family: Consolas;
-            }
-
-            * {
-                user-select: none;
-            }
-
-            body {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 1fr;
-                gap: 0px 0px;
-                grid-template-areas: ". .";
-                overflow: hidden;
-                background: black;
-                height: 100vh;
-                margin: 0;
-                background: url(https://media0.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif) center center no-repeat;
-                background-size: cover;
-                background-color: black;
-            }
-
-            body::before {
-                content: "";
-                width: 100vw;
-                height: 100vh;
-                background: black;
-                position: absolute;
-                opacity: 0.35;
-                z-index: -1;
-            }
-
-            .main {
-                display: flex;
-                text-align: center;
-                z-index: 10;
-                font-family: Consolas;
-                color: #dedede;
-                width: 100vw;
-                flex-direction: column;
-                justify-content: center;
-            }
-
-            .main>h1 {
-                text-align: center;
-                color: white;
-                margin: 0;
-                font-size: 50vh;
-                color: #ffffffc4;
-                filter: drop-shadow(2px 4px 6px black);
-            }
-
-            .arrow {
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                display: inline-block;
-                padding: 3px;
-                font-family: Consolas;
-            }
-
-            .right {
-                transform: rotate(-45deg);
-                -webkit-transform: rotate(-45deg);
-            }
-
-            .next {
-                top: 50%;
-                color: white;
-                position: fixed;
-                right: 10px;
-                padding: 0 21px;
-                height: 50px;
-                z-index: 10;
-                border: solid #ffffff66 1px;
-                border-radius: 25px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 9px;
-                transition: width 50ms linear;
-                transform: translateY(-50%);
-            }
-
-            .next>div.overflow {
-                display: block;
-                max-width: 80px;
-                overflow: hidden;
-                width: 0%;
-                transition: width 50ms linear;
-            }
-
-            .next .text {
-                font-family: Consolas;
-                font-weight: 600;
-                color: white;
-                transition: width 1s;
-                padding-right: 10px;
-                margin-left: 100%;
-                transition: margin-left 50ms linear;
-            }
-
-            .next:hover div.overflow {
-                width: fit-content;
-            }
-
-            .next:hover .text {
-                margin-left: 0%;
-            }
-
-            .next:hover {
-                width: fit-content;
-            }
-
-            #parent {
-                width: 100vw;
-                height: 100vh;
-                display: grid;
-                width: 100vw;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr;
-                gap: 0px 0px;
-                grid-template-areas: ". . . .";
-                overflow: hidden;
-            }
-
-            page {
-                width: 100vw;
-            }
-
-            #parent>page.current,
-            #parent>page.transition-to {
-                transform: translateX(-100%);
-            }
-
-            page.current {
-                transform: unset;
-                transition: transform ease 1s;
-            }
-
-            page.transition-to {
-                transform: unset;
-                transition: transform ease 1s;
-            }
-
-            .next.hidden {
-                color: red !important;
-                display: none !important;
-            }
-
-            textarea.eula {
-                font-family: Consolas;
-                height: 318px;
-                width: 545px;
-                background: #000000a6;
-                border-radius: 10px;
-                padding: 20px 10px;
-                overflow-x: hidden;
-                font-weight: bold;
-                color: white;
-                overflow-x: hidden;
-                resize: none;
-                outline: none;
-                user-select: text;
-            }
-
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: transparent;
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: #222;
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-        </style>
-    </head>
-    <body>
-        <header></header>
-        <script></script>
-        <div id="parent" style="width:100vw;">
-            <div class="main">
-                <h1>VX</h1>
-                <h2>fastest, xyz, 123 discord client mod</h2>
-            </div>
-            <div class="main elua">
-                <h2>please agree to the EULA:</h2>
-                <center>
-                    <textarea class="eula" readonly>End-User License Agreement for BetterDiscord
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VX - Installer</title>
+</head>
+<body>
+  <img src="https://media0.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif" id="background">
+  <div id="titlebar">
+    <div id="titlebar-logo">
+      <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentcolor" d="M51.4697 27.0801L38.96 74.6582L22.0068 75.6152L6.62598 27.5586L22.8271 26.0547L29.3896 54.082L35.7471 26.0547L51.4697 27.0801ZM93.75 27.0801L80.4199 50.2539L91.7676 70.4199L77.4805 74.8633L71.3281 60.918L64.082 74.9316L49.3164 69.5996L61.8945 49.7754L50.4102 28.9258L66.0645 25.166L71.6699 38.9062L77.6172 25.166L93.75 27.0801Z"></path>
+      </svg>
+    </div>
+    <div id="titlebar-buttons">
+      <div id="close" class="titlebar-button">
+        <svg aria-hidden="true" role="img" width="18" height="18" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div id="pages">
+    <div id="home">
+      <div id="logo">
+        <svg width="300" height="300" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentcolor" d="M51.4697 27.0801L38.96 74.6582L22.0068 75.6152L6.62598 27.5586L22.8271 26.0547L29.3896 54.082L35.7471 26.0547L51.4697 27.0801ZM93.75 27.0801L80.4199 50.2539L91.7676 70.4199L77.4805 74.8633L71.3281 60.918L64.082 74.9316L49.3164 69.5996L61.8945 49.7754L50.4102 28.9258L66.0645 25.166L71.6699 38.9062L77.6172 25.166L93.75 27.0801Z"></path>
+        </svg>
+      </div>
+      <div>fastest, xyz, 123 discord client mod</div>
+    </div>
+    <div id="eula">
+      <h2 id="eula-header">Please agree this EULA</h2>
+      <div id="eula-text-wrapper">
+        <div id="eula-text">End-User License Agreement for VX
 
 PLEASE READ THIS AGREEMENT CAREFULLY. IT CONTAINS IMPORTANT TERMS THAT AFFECT YOU AND YOUR USE OF THE SOFTWARE. BY INSTALLING, COPYING OR USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL, COPY, OR USE THE SOFTWARE.
 
@@ -232,50 +62,321 @@ The author(s) of this Software expressly disclaims any warranty for the Software
 
 
 4. NO LIABILITY FOR DAMAGES.
-In no event shall the author(s) of this Software be liable for any special, consequential, incidental or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use this product, even if the author(s) of this Software is aware of the possibility of such damages and known defects.</textarea>
-                </center>
-            </div>
-            <div class="main">
-                <h2>fastest, xyz, 123 discord client mod</h2>
-            </div>
+In no event shall the author(s) of this Software be liable for any special, consequential, incidental or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use this product, even if the author(s) of this Software is aware of the possibility of such damages and known defects.</div>
+      </div>
+    </div>
+    <div id="action">
+      <div class="discord discord-disabled" id="stable">
+        <div class="discord-icon-wrapper">      
+          <div class="discord-icon">
+            <svg aria-hidden="false" width="42" height="30" viewbox="0 0 28 20">
+              <path fill="currentColor" d="M23.0212 1.67671C21.3107 0.879656 19.5079 0.318797 17.6584 0C17.4062 0.461742 17.1749 0.934541 16.9708 1.4184C15.003 1.12145 12.9974 1.12145 11.0283 1.4184C10.819 0.934541 10.589 0.461744 10.3368 0.00546311C8.48074 0.324393 6.67795 0.885118 4.96746 1.68231C1.56727 6.77853 0.649666 11.7538 1.11108 16.652C3.10102 18.1418 5.3262 19.2743 7.69177 20C8.22338 19.2743 8.69519 18.4993 9.09812 17.691C8.32996 17.3997 7.58522 17.0424 6.87684 16.6135C7.06531 16.4762 7.24726 16.3387 7.42403 16.1847C11.5911 18.1749 16.408 18.1749 20.5763 16.1847C20.7531 16.3332 20.9351 16.4762 21.1171 16.6135C20.41 17.0369 19.6639 17.3997 18.897 17.691C19.3052 18.4993 19.7718 19.2689 20.3021 19.9945C22.6677 19.2689 24.8929 18.1364 26.8828 16.6466H26.8893C27.43 10.9731 25.9665 6.04728 23.0212 1.67671ZM9.68041 13.6383C8.39754 13.6383 7.34085 12.4453 7.34085 10.994C7.34085 9.54272 8.37155 8.34973 9.68041 8.34973C10.9893 8.34973 12.0395 9.54272 12.0187 10.994C12.0187 12.4453 10.9828 13.6383 9.68041 13.6383ZM18.3161 13.6383C17.0332 13.6383 15.9765 12.4453 15.9765 10.994C15.9765 9.54272 17.0124 8.34973 18.3161 8.34973C19.6184 8.34973 20.6751 9.54272 20.6543 10.994C20.6543 12.4453 19.6184 13.6383 18.3161 13.6383Z"></path>
+            </svg>
+          </div>
         </div>
-        <div class="next">
-            <div class="overflow">
-                <i class="text">START</i>
-            </div>
-            <i class="arrow right"></i>
+        <div class="discord-info">
+          <div class="discord-name">Stable</div>
+          <div class="discord-path">???</div>
         </div>
-        <script src="./jquery.min.js"></script>
-        <script>
-            jQuery(document).ready(function($) {
-                var slideCount = $("#parent > div").length;
-                var slideWidth = $("#parent > div").width();
-                var slideHeight = $("#parent > div").height();
-                var sliderUlWidth = slideCount * slideWidth;
-                let index = 0;
-                const names = ["START", "AGREE", "INSTALL"]
+        <div class="discord-actions">
+          <button>install</button>
+          <button>uninstall</button>
+        </div>
+      </div>
+      <div class="discord discord-disabled" id="ptb">
+        <div class="discord-icon-wrapper">      
+          <div class="discord-icon">
+            <svg aria-hidden="false" width="42" height="30" viewbox="0 0 28 20">
+              <path fill="currentColor" d="M23.0212 1.67671C21.3107 0.879656 19.5079 0.318797 17.6584 0C17.4062 0.461742 17.1749 0.934541 16.9708 1.4184C15.003 1.12145 12.9974 1.12145 11.0283 1.4184C10.819 0.934541 10.589 0.461744 10.3368 0.00546311C8.48074 0.324393 6.67795 0.885118 4.96746 1.68231C1.56727 6.77853 0.649666 11.7538 1.11108 16.652C3.10102 18.1418 5.3262 19.2743 7.69177 20C8.22338 19.2743 8.69519 18.4993 9.09812 17.691C8.32996 17.3997 7.58522 17.0424 6.87684 16.6135C7.06531 16.4762 7.24726 16.3387 7.42403 16.1847C11.5911 18.1749 16.408 18.1749 20.5763 16.1847C20.7531 16.3332 20.9351 16.4762 21.1171 16.6135C20.41 17.0369 19.6639 17.3997 18.897 17.691C19.3052 18.4993 19.7718 19.2689 20.3021 19.9945C22.6677 19.2689 24.8929 18.1364 26.8828 16.6466H26.8893C27.43 10.9731 25.9665 6.04728 23.0212 1.67671ZM9.68041 13.6383C8.39754 13.6383 7.34085 12.4453 7.34085 10.994C7.34085 9.54272 8.37155 8.34973 9.68041 8.34973C10.9893 8.34973 12.0395 9.54272 12.0187 10.994C12.0187 12.4453 10.9828 13.6383 9.68041 13.6383ZM18.3161 13.6383C17.0332 13.6383 15.9765 12.4453 15.9765 10.994C15.9765 9.54272 17.0124 8.34973 18.3161 8.34973C19.6184 8.34973 20.6751 9.54272 20.6543 10.994C20.6543 12.4453 19.6184 13.6383 18.3161 13.6383Z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="discord-info">
+          <div class="discord-name">PTB</div>
+          <div class="discord-path">???</div>
+        </div>
+        <div class="discord-actions">
+          <button>install</button>
+          <button>uninstall</button>
+        </div>
+      </div>
+      <div class="discord discord-disabled" id="canary">
+        <div class="discord-icon-wrapper">      
+          <div class="discord-icon">
+            <svg aria-hidden="false" width="42" height="30" viewbox="0 0 28 20">
+              <path fill="currentColor" d="M23.0212 1.67671C21.3107 0.879656 19.5079 0.318797 17.6584 0C17.4062 0.461742 17.1749 0.934541 16.9708 1.4184C15.003 1.12145 12.9974 1.12145 11.0283 1.4184C10.819 0.934541 10.589 0.461744 10.3368 0.00546311C8.48074 0.324393 6.67795 0.885118 4.96746 1.68231C1.56727 6.77853 0.649666 11.7538 1.11108 16.652C3.10102 18.1418 5.3262 19.2743 7.69177 20C8.22338 19.2743 8.69519 18.4993 9.09812 17.691C8.32996 17.3997 7.58522 17.0424 6.87684 16.6135C7.06531 16.4762 7.24726 16.3387 7.42403 16.1847C11.5911 18.1749 16.408 18.1749 20.5763 16.1847C20.7531 16.3332 20.9351 16.4762 21.1171 16.6135C20.41 17.0369 19.6639 17.3997 18.897 17.691C19.3052 18.4993 19.7718 19.2689 20.3021 19.9945C22.6677 19.2689 24.8929 18.1364 26.8828 16.6466H26.8893C27.43 10.9731 25.9665 6.04728 23.0212 1.67671ZM9.68041 13.6383C8.39754 13.6383 7.34085 12.4453 7.34085 10.994C7.34085 9.54272 8.37155 8.34973 9.68041 8.34973C10.9893 8.34973 12.0395 9.54272 12.0187 10.994C12.0187 12.4453 10.9828 13.6383 9.68041 13.6383ZM18.3161 13.6383C17.0332 13.6383 15.9765 12.4453 15.9765 10.994C15.9765 9.54272 17.0124 8.34973 18.3161 8.34973C19.6184 8.34973 20.6751 9.54272 20.6543 10.994C20.6543 12.4453 19.6184 13.6383 18.3161 13.6383Z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="discord-info">
+          <div class="discord-name">Canary</div>
+          <div class="discord-path">???</div>
+        </div>
+        <div class="discord-actions">
+          <button>install</button>
+          <button>uninstall</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="next">
+    <div id="next-text">Next</div>
+    <div id="next-icon">
+      <svg aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
+        <g fill="none" fill-rule="evenodd">
+          <polygon fill="currentColor" fill-rule="nonzero" points="8.47 2 6.12 4.35 13.753 12 6.12 19.65 8.47 22 18.47 12"></polygon>
+          <polygon points="0 0 24 0 24 24 0 24"></polygon>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    #background {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      background-color: black;
+    }
+    #titlebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      -webkit-app-region: drag;
+    }
+    #titlebar-logo {
+      color: white;
+      display: flex;
+      padding: 3px;
+    }
+    #titlebar-buttons {
+      display: flex;
+      flex-direction: row;
+    }
+    .titlebar-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgb(228, 231, 255);
+      height: 30px;
+      width: 40px;
+      background-color: transparent;
+      cursor: pointer;
+      -webkit-app-region: none;
+    }
+    #close:hover {
+      background-color: red;
+    }
+    #pages, #home, #eula, #action {
+      height: calc(100vh - 30px);
+      width: 100vw;
+      position: fixed;
+      left: 100%;
+      top: 30px;
+    }
 
-                function moveRight(event) {
-                    $("#parent").animate({
-                        "margin-left": "-100%"
-                    }, 200, function() {
-                        $("#parent > div:first-child").remove();
-                        $("#parent").css({
-                            "margin-left": 0
-                        });
-                        $(".text").text(names[++index]);
-                        if (index >= 3) {
-                            $(".next").remove();
-                            install();
-                        }
-                    });
-                }
-                $(".next").click(moveRight);
-            });
+    #home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateX(-100%);
+    }
+    #logo {
+      color: white;
+    }
+    #logo + div {
+      color: whitesmoke;
+      font-size: larger;
+    }
 
-            function install() {
-                ipcRenderer.send('install')
-            }
-        </script>
-    </body>
+    #eula {
+      color: white;
+    }
+    #eula-header {
+      margin: 1.5em 60px;
+    }
+    #eula-text {
+      overflow: hidden;
+      max-height: calc(100vh - 30px - 1.5em - 100px);
+      margin: 0 60px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      background-color: #1e1f21cb;
+      border: 1px solid #636363;
+    }
+    #eula-text::-webkit-scrollbar {
+      width: 16px;
+      height: 16px;
+    }
+    #eula-text::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+    #eula-text::-webkit-scrollbar-thumb {
+      background-color: #636363;
+      min-height: 40px;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+      border-radius: 8px;
+    }
+    #eula-text::-webkit-scrollbar-track {
+      background-color: #27282b;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+      border-radius: 8px;
+    }
+    #eula-text {
+      max-height: calc(100vh - 30px - 1.5em - 100px);
+      box-sizing: border-box;
+      overflow: hidden scroll;
+      white-space: pre-wrap;
+      padding: 6px;
+    }
+
+    .discord {
+      display: flex;
+      background-color: red;
+      gap: 8px;
+      padding: 8px;
+      overflow: hidden;
+      border-radius: 6px;
+      
+      margin: 0 60px 8px 60px;
+    }
+    .discord-icon-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .discord-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      padding: 4px;
+      color: white;
+      height: 40px;
+      width: 40px;
+    }
+    #stable .discord-icon { background-color: #596aef }
+    #ptb .discord-icon { background-color: #5868f4 }
+    #canary .discord-icon { background-color: #f9b34b }
+    .discord-info {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .discord-name {
+      font-size: larger;
+    }
+    .discord-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .discord-path {
+      /* text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 575px;
+      overflow: hidden; */
+      font-size: smaller;
+    }
+
+    #next {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      transition: width linear 200ms;
+      overflow: hidden;
+      background-color: #1e1f21;
+      cursor: pointer;
+      border: 1px solid #636363;
+    }
+    #next:hover {
+      width: 100px;
+    }
+    #next-text {
+      color: white;
+      padding-left: 12px;
+    }
+    #next-icon {
+      color: white;
+      display: flex;
+      height: 40px;
+      min-width: 40px;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: #1e1f21;
+    }
+
+    .leaving {
+      transform: translateX(-200%) !important;
+      transition: transform linear 200ms;
+    }
+    .showing {
+      transform: translateX(-100%);
+      transition: transform linear 200ms;
+    }
+  </style>
+  <script defer type="module">
+    const VX = Object.assign({
+      quit() { window.close(); },
+      getDiscordCorePath() { return Promise.resolve(null); },
+      install() {},
+      uninstall() {}
+    }, window.VX);
+
+    const page = { current: "home" };
+    const nextButton = document.getElementById("next");
+    nextButton.addEventListener("click", () => {
+      if (page.current === "home") {
+        document.getElementById("home").classList.add("leaving");
+        document.getElementById("eula").classList.add("showing");
+        page.current = "eula";
+      }
+      else if (page.current === "eula") {
+        document.getElementById("eula").classList.add("leaving");
+        document.getElementById("action").classList.add("showing");
+        page.current = "action";
+
+        nextButton.style.display = "none";
+      }
+    });
+    document.getElementById("close").addEventListener("click", VX.quit);
+
+    for (const element of document.getElementsByClassName("discord-path")) {
+      const parent = element.closest(".discord");
+
+      VX.getDiscordCorePath(parent.id).then(path => {
+        if (!path) return;
+        element.innerHTML = path;
+        parent.classList.remove("discord-disabled");
+      });
+    };
+  </script>
+</body>
 </html>
