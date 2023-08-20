@@ -8,7 +8,7 @@
   <title>VX - Installer</title>
 </head>
 <body>
-  <img src="https://media0.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif" id="background">
+  <img src="https://media0.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif" id="background" style="filter:brightness(0.65)">
   <div id="titlebar">
     <div id="titlebar-logo">
       <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -16,6 +16,7 @@
       </svg>
     </div>
     <div id="titlebar-buttons">
+      <div id="minimize" class="titlebar-button"><svg aria-hidden="true" role="img" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M4 11 20 11 20 13 4 13Z"></path></svg></div>
       <div id="close" class="titlebar-button">
         <svg aria-hidden="true" role="img" width="18" height="18" viewBox="0 0 24 24">
           <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path>
@@ -79,8 +80,8 @@ In no event shall the author(s) of this Software be liable for any special, cons
           <div class="discord-path">???</div>
         </div>
         <div class="discord-actions">
-          <button>install</button>
-          <button>uninstall</button>
+          <button id="installStable">install</button>
+          <button id="uninstallStable">uninstall</button>
         </div>
       </div>
       <div class="discord discord-disabled" id="ptb">
@@ -96,8 +97,8 @@ In no event shall the author(s) of this Software be liable for any special, cons
           <div class="discord-path">???</div>
         </div>
         <div class="discord-actions">
-          <button>install</button>
-          <button>uninstall</button>
+          <button id="installPTB">install</button>
+          <button id="uninstallPTB">uninstall</button>
         </div>
       </div>
       <div class="discord discord-disabled" id="canary">
@@ -113,14 +114,14 @@ In no event shall the author(s) of this Software be liable for any special, cons
           <div class="discord-path">???</div>
         </div>
         <div class="discord-actions">
-          <button>install</button>
-          <button>uninstall</button>
+          <button id="installCanary">install</button>
+          <button id="uninstallCanary">uninstall</button>
         </div>
       </div>
     </div>
   </div>
   <div id="next">
-    <div id="next-text">Next</div>
+    <div id="next-text">START</div>
     <div id="next-icon">
       <svg aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24">
         <g fill="none" fill-rule="evenodd">
@@ -131,6 +132,10 @@ In no event shall the author(s) of this Software be liable for any special, cons
     </div>
   </div>
   <style>
+    * {
+      transition: background 200ms;
+      user-select: none;
+    }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
@@ -160,6 +165,7 @@ In no event shall the author(s) of this Software be liable for any special, cons
       color: white;
       display: flex;
       padding: 3px;
+      padding-left: 6px;
     }
     #titlebar-buttons {
       display: flex;
@@ -177,7 +183,10 @@ In no event shall the author(s) of this Software be liable for any special, cons
       -webkit-app-region: none;
     }
     #close:hover {
-      background-color: red;
+      background-color: #ff0000c4;
+    }
+    #minimize:hover {
+      background-color: #515151c4;
     }
     #pages, #home, #eula, #action {
       height: calc(100vh - 30px);
@@ -185,6 +194,13 @@ In no event shall the author(s) of this Software be liable for any special, cons
       position: fixed;
       left: 100%;
       top: 30px;
+    }
+
+    #action{
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: space-evenly;
     }
 
     #home {
@@ -196,6 +212,9 @@ In no event shall the author(s) of this Software be liable for any special, cons
     }
     #logo {
       color: white;
+    }
+    #logo > svg{
+      filter: drop-shadow(4px 1px 8px black);
     }
     #logo + div {
       color: whitesmoke;
@@ -209,13 +228,21 @@ In no event shall the author(s) of this Software be liable for any special, cons
       margin: 1.5em 60px;
     }
     #eula-text {
-      overflow: hidden;
-      max-height: calc(100vh - 30px - 1.5em - 100px);
       margin: 0 60px;
       box-sizing: border-box;
       border-radius: 8px;
       background-color: #1e1f21cb;
       border: 1px solid #636363;
+      margin-right: 122px;
+
+
+      max-height: calc(100vh - 30px - 1.5em - 100px);
+      box-sizing: border-box;
+      overflow: hidden scroll;
+      white-space: pre-wrap;
+      padding: 6px;
+
+      user-select: text;
     }
     #eula-text::-webkit-scrollbar {
       width: 16px;
@@ -237,17 +264,10 @@ In no event shall the author(s) of this Software be liable for any special, cons
       background-clip: padding-box;
       border-radius: 8px;
     }
-    #eula-text {
-      max-height: calc(100vh - 30px - 1.5em - 100px);
-      box-sizing: border-box;
-      overflow: hidden scroll;
-      white-space: pre-wrap;
-      padding: 6px;
-    }
 
     .discord {
       display: flex;
-      background-color: red;
+      background-color: #313338cb;
       gap: 8px;
       padding: 8px;
       overflow: hidden;
@@ -278,15 +298,27 @@ In no event shall the author(s) of this Software be liable for any special, cons
       display: flex;
       flex-direction: column;
       gap: 3px;
+      color: white;
+      font-weight: 500;
     }
     .discord-name {
       font-size: larger;
     }
     .discord-actions {
       display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 8px;
+      flex-direction: column;
+    }
+    .discord-actions > button {
+      background: #5865F2;
+      border-radius: 5px;
+      height: 40px;
+      width: 90px;
+      color: white;
+      border: none;
+    }
+    .discord-actions > button:hover {
+      background: #4752C4;
     }
     .discord-path {
       /* text-overflow: ellipsis;
@@ -350,23 +382,68 @@ In no event shall the author(s) of this Software be liable for any special, cons
       uninstall() {}
     }, window.VX);
 
+    function install(a) {
+      switch(a.target.id){
+        case "installStable": {
+          VX.install("stable");
+          break;
+        }
+        case "installPTB": {
+          VX.install("ptb");
+          break;
+        }
+        case "installCanary": {
+          VX.install("canary");
+          break;
+        }
+      }
+    }
+    function uninstall(a) {
+      switch(a.target.id){
+        case "uninstallStable": {
+          VX.uninstall("stable");
+          break;
+        }
+        case "uninstallPTB": {
+          VX.uninstall("ptb");
+          break;
+        }
+        case "uninstallCanary": {
+          VX.uninstall("canary");
+          break;
+        }
+      }
+    }
+
     const page = { current: "home" };
     const nextButton = document.getElementById("next");
+    const nextButtonText = document.getElementById("next-text");
     nextButton.addEventListener("click", () => {
       if (page.current === "home") {
         document.getElementById("home").classList.add("leaving");
         document.getElementById("eula").classList.add("showing");
         page.current = "eula";
+        nextButtonText.innerText = "AGREE";
       }
       else if (page.current === "eula") {
         document.getElementById("eula").classList.add("leaving");
         document.getElementById("action").classList.add("showing");
         page.current = "action";
-
         nextButton.style.display = "none";
+        nextButtonText.innerText = "INSTALL";
+
+        document.getElementById("installStable").addEventListener("click", install);
+        document.getElementById("uninstallStable").addEventListener("click", uninstall);
+
+        document.getElementById("installPTB").addEventListener("click", install);
+        document.getElementById("uninstallPTB").addEventListener("click", uninstall);
+
+        document.getElementById("installCanary").addEventListener("click", install);
+        document.getElementById("uninstallCanary").addEventListener("click", uninstall);
       }
     });
     document.getElementById("close").addEventListener("click", VX.quit);
+    document.getElementById("minimize").addEventListener("click", VX.minimize);
 
     for (const element of document.getElementsByClassName("discord-path")) {
       const parent = element.closest(".discord");

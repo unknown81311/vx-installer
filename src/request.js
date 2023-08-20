@@ -11,6 +11,11 @@ module.exports = function request(url, options, callback) {
     /** @type {Buffer[]} */
     const chunks = [];
     
+    if (res.statusCode === 302) {
+      request(res.headers.location, options, callback);
+      return;
+    };
+
     res.on("data", chunk => { chunks.push(chunk); });
     res.on("end", () => {
       const size = chunks.reduce((pre, current) => current.length + pre, 0);

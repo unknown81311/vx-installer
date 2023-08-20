@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require("electron/renderer");
+const { remote, ipcRenderer, contextBridge } = require("electron/renderer");
 const path = require("node:path");
 const fs = require("original-fs");
 const request = require("./request");
@@ -17,7 +17,7 @@ function downloadAsar() {
       const releases = JSON.parse(body.toString("utf-8"));
       const release = releases.at(0);
       const asset = release.assets.find((asset) => asset.name === "vx.asar");
-  
+
       request(asset.url, {
         headers: {
           "User-Agent": "VX~Installer",
@@ -32,7 +32,10 @@ function downloadAsar() {
   });
 };
 
-const appData = path.join(ipcRenderer.sendSync("app.getPath", "appData"), "..", "local");
+
+const localAppData = path.join(ipcRenderer.sendSync("app.getPath", "appData"), "..", "local");
+
+const appData = path.join(ipcRenderer.sendSync("app.getPath", "appData"));
 
 async function ensureDirectory() {
   const vxDirectory = path.join(appData, ".vx");
@@ -44,9 +47,9 @@ async function ensureDirectory() {
 async function getDiscordCorePath(release) {
   try {
     const discordName = `discord${release === "stable" ? "" : release}`;
-    const appDir = (await fs.promises.readdir(path.join(appData, discordName))).filter(m => m.startsWith("app-")).reverse().at(0);
-    const core = (await fs.promises.readdir(path.join(appData, discordName, appDir, "modules"))).filter(m => m.startsWith("discord_desktop_core-")).reverse().at(0);
-    return path.join(appData, discordName, appDir, "modules", core, "discord_desktop_core");
+    const appDir = (await fs.promises.readdir(path.join(localAppData, discordName))).filter(m => m.startsWith("app-")).reverse().at(0);
+    const core = (await fs.promises.readdir(path.join(localAppData, discordName, appDir, "modules"))).filter(m => m.startsWith("discord_desktop_core-")).reverse().at(0);
+    return path.join(localAppData, discordName, appDir, "modules", core, "discord_desktop_core");
   } catch (error) {
     return null;
   }
@@ -65,7 +68,7 @@ async function install(release) {
   const vxDirectory = path.join(appData, ".vx");
   await ensureDirectory();
   
-  await fs.promises.writeFile(path.join(discordCorePath, "index.js"), `require(${JSON.stringify(path.join(vxDirectory, "vx.asar"))});module.exports = require('./core.asar');`);
+  await fs.promises.writeFile(path.join(discordCorePath, "index.js"), `require(${JSON.stringify(path.join(vxDirectory, "vx.asar"))});\nmodule.exports = require('./core.asar');`);
 }
 /**
  * 
@@ -82,5 +85,8 @@ async function uninstall(release) {
 function quit() {
   ipcRenderer.send("app.quit");
 };
+function minimize() {
+  ipcRenderer.send("app.minimize");
+};
 
-contextBridge.exposeInMainWorld("VX", window.VX = { install, uninstall, quit, getDiscordCorePath });
+contextBridge.exposeInMainWorld("VX", window.VX = { install, uninstall, quit, minimize, getDiscordCorePath });

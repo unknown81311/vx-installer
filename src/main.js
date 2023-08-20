@@ -1,8 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require("electron/main");
 const path = require("node:path");
 
+let window;
+
 app.once("ready", () => {
-  const window = new BrowserWindow({
+  window = new BrowserWindow({
     width: 780,
     height: 470,
     resizable: false,
@@ -24,4 +26,7 @@ ipcMain.on("app.getPath", (event, name) => {
 });
 ipcMain.on("app.quit", (event, name) => {
   app.quit();
+});
+ipcMain.on("app.minimize", (event, name) => {
+  window.minimize()
 });
