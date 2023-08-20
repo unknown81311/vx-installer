@@ -317,6 +317,17 @@ In no event shall the author(s) of this Software be liable for any special, cons
       color: white;
       border: none;
     }
+
+    .discord-disabled .discord-actions > button {
+      cursor: not-allowed;
+      background: #43454c;
+    }
+    
+    .discord-disabled .discord-actions > button:hover {
+      background: #1E1F22;
+
+    }
+
     .discord-actions > button:hover {
       background: #4752C4;
     }
@@ -396,7 +407,10 @@ In no event shall the author(s) of this Software be liable for any special, cons
           VX.install("canary");
           break;
         }
+        default :{return;}
       }
+      alert("installed VX!");
+      // VX.quit();
     }
     function uninstall(a) {
       switch(a.target.id){
@@ -412,7 +426,10 @@ In no event shall the author(s) of this Software be liable for any special, cons
           VX.uninstall("canary");
           break;
         }
+        default :{return;}
       }
+      alert("uninstalled VX!");
+      // VX.quit();
     }
 
     const page = { current: "home" };
